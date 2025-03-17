@@ -19,6 +19,8 @@ class ELFConfig(Config):
     rsshub: AnyHttpUrl = "https://rsshub.app"  # type: ignore
     # 备用 rsshub 地址
     rsshub_backup: List[AnyHttpUrl] = []
+    # RSSHub access key，用于访问有鉴权的RSSHub实例
+    rsshub_access_key: Optional[str] = None
     db_cache_expire: int = 30
     limit: int = 200
     max_length: int = 1024  # 正文长度限制，防止消息太长刷屏，以及消息过长发送失败的情况

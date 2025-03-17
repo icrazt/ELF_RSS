@@ -64,7 +64,13 @@ async def handle_rsshub_routes(
     global rsshub_routes
     if not rsshub_routes:
         async with aiohttp.ClientSession() as session:
-            resp = await session.get(rsshub_url.with_path("api/routes"), proxy=proxy)
+            api_url = rsshub_url.with_path("api/routes")
+            
+            # 如果配置了access_key，添加到URL中
+            if config.rsshub_access_key:
+                api_url = api_url.with_query(access_key=config.rsshub_access_key)
+                
+            resp = await session.get(api_url, proxy=proxy)
             if resp.status != 200:
                 await RSSHUB_ADD.finish(
                     "获取路由数据失败，请检查 RSSHub 的地址配置及网络连接"

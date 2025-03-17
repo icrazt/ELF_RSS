@@ -50,7 +50,17 @@ class Rss:
         if URL(self.url).scheme in ["http", "https"]:
             return self.url
         # 去除 rsshub地址末尾的斜杠 和 订阅地址开头的斜杠
-        return f"{rsshub.rstrip('/')}/{self.url.lstrip('/')}"
+        url = f"{rsshub.rstrip('/')}/{self.url.lstrip('/')}"
+        
+        # 如果配置了access_key，添加到url中
+        if config.rsshub_access_key:
+            # 检查URL是否已经有参数
+            if "?" in url:
+                url += f"&access_key={config.rsshub_access_key}"
+            else:
+                url += f"?access_key={config.rsshub_access_key}"
+                
+        return url
 
     # 读取记录
     @staticmethod
