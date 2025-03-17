@@ -56,9 +56,9 @@ class Rss:
         if config.rsshub_access_key:
             # 检查URL是否已经有参数
             if "?" in url:
-                url += f"&access_key={config.rsshub_access_key}"
+                url += f"&key={config.rsshub_access_key}"
             else:
-                url += f"?access_key={config.rsshub_access_key}"
+                url += f"?key={config.rsshub_access_key}"
                 
         return url
 
