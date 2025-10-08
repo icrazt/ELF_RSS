@@ -8,11 +8,11 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4.2.2
+      - uses: actions/checkout@v4.3.0
       - name: Set up Python
-        uses: actions/setup-python@v4.8.0
+        uses: actions/setup-python@v4.9.1
         with:
-          python-version: '3.13.2'
+          python-version: '3.13.7'
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
@@ -20,7 +20,7 @@ jobs:
       - name: Build package
         run: python -m build
       - name: Publish package
-        uses: pypa/gh-action-pypi-publish@v1.12.4
+        uses: pypa/gh-action-pypi-publish@v1.13.0
         with:
           user: __token__
           password: ${{ secrets.PYPI_API_TOKEN }}
